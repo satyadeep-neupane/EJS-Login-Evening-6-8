@@ -1,0 +1,32 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Fullname</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(const user of users){ %>
+      <tr>
+        <th scope="row">1</th>
+        <td>
+          <%= user.fullname %>
+        </td>
+        <td>
+          <%= user.email %>
+        </td>
+        <td>
+          <%= user.role %>
+        </td>
+        <td>
+          <form action="/user/<%= user._id %>/delete" method="POST">
+            <button class="btn btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% } %>
+  </tbody>
+</table>
