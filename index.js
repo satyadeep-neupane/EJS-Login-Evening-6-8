@@ -5,6 +5,7 @@ const path = require('path');
 
 const session = require('express-session');
 const expressLayouts = require('express-ejs-layouts');
+const fileUpload = require('express-fileupload');
 
 // session
 app.use(session({
@@ -21,7 +22,8 @@ app.set('layout', 'layout/layout');
 // body-parser
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
+app.use(fileUpload());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // dotenv
 require('dotenv').config();
@@ -44,6 +46,7 @@ app.use(expressLayouts);
 
 // protected routes
 app.use('/user', require('./app/routes/router.user'));
+app.use('/banner', require('./app/routes/router.banner'));
 
 app.listen(PORT, () =>{
     console.log(`App Listening on PORT ${PORT}`);

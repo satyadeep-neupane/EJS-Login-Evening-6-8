@@ -17,12 +17,24 @@ exports.store = async (req, res) => {
 }
 
 exports.list = async (req, res) => {
+    const {page, perPage = 10} = req.query;
+    let total = await User.count();
+    let totalPage = 1;
     try{
-        const u = await User.find().select('-password');
-        res.render('user/index', {users: u});
+        let u =  User.find().select('-password');
+
+        if(page)
+        {
+            u.byPage(page, perPage);
+            totalPage = Math.ceil(total / perPage);
+        }
+
+        u = await u;
+
+        res.render('user/index', {users: u, totalPage, page, perPage});
     }catch(err)
     {
-        res.send("Error");
+        res.send("Error"+err.message);
     }
 }
 

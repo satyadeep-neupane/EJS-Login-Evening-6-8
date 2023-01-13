@@ -45,4 +45,9 @@ userSchema.virtual('role').get(function() {
 });
 
 
+// query to limit user
+userSchema.query.byPage = function(page, perPage){
+    return this.limit(perPage).skip((page - 1) * perPage);
+};
+
 module.exports = mongoose.model('User', userSchema);

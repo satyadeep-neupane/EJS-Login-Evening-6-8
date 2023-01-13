@@ -1,0 +1,33 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Image</th>
+      <th scope="col">Expire Date</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% let i = 1 %>
+    <% for(const banner of banners){ %>
+      <tr>
+        <th scope="row"><%= i++ %></th>
+        <td>
+          <%= banner.title %>
+        </td>
+        <td>
+          <img src="<%= banner.image %>" alt="img" width="50">
+        </td>
+        <td>
+          <%= banner.expire_date %>
+        </td>
+        <td>
+          <form action="/banner/<%= banner._id %>/delete" method="POST">
+            <button class="btn btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% } %>
+  </tbody>
+</table>
